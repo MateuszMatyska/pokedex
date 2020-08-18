@@ -1,13 +1,13 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import {SafeAreaView, View, Text} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import MainStack from 'src/navigation/stack/MainStack';
 
 const App: React.FC<any> = () => {
   return (
-    <SafeAreaView>
-      <View>
-        <Text>It works</Text>
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <MainStack />
+    </NavigationContainer>
   );
 };
 
