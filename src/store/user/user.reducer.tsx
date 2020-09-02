@@ -6,7 +6,11 @@ export interface ILoginReducer {
   type: userActionTypes.LOGIN;
 }
 
-type UserReducers = ILoginReducer;
+export interface ILogoutReducer {
+  type: userActionTypes.LOGOUT;
+}
+
+type UserReducers = ILoginReducer | ILogoutReducer;
 
 export interface IUserInitialState {
   user: IUser | null;
@@ -31,6 +35,11 @@ export const UserReducer: Reducer<IUserInitialState, UserReducers> = (
           name: 'Ash',
           code: 1234,
         },
+      };
+    case userActionTypes.LOGOUT:
+      return {
+        ...state,
+        user: null,
       };
     default:
       return state;
