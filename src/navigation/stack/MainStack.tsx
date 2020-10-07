@@ -7,7 +7,7 @@ const MainStack: React.FC<any> = () => {
   const Stack = createStackNavigator();
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator headerMode="none">
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>

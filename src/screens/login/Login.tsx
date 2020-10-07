@@ -1,80 +1,126 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useRef} from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  Button,
-  Platform,
-  UIManager,
-  Animated,
-  LayoutAnimation,
-} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {SafeAreaView, View, Button, Animated} from 'react-native';
 import {LoginUser} from 'src/store/user/user.action';
 import {useDispatch} from 'react-redux';
-import {navigate} from '../../navigation/NavigationServices';
-import PokedexAnimation from '../../components/pokedexAnimation/PokedexAnimation';
+import {navigate} from 'src/navigation/NavigationServices';
+import PokedexAnimation from 'src/components/pokedexAnimation/PokedexAnimation';
+import PokeInput from 'src/components/pokeInput/PokeInput';
 import {styles} from './Login.styles';
-
-if (
-  Platform.OS === 'android' &&
-  UIManager.setLayoutAnimationEnabledExperimental
-) {
-  UIManager.setLayoutAnimationEnabledExperimental(true);
-}
 
 const Login: React.FC<any> = () => {
   const pokedexOpacity = useRef(new Animated.Value(1)).current;
   const opacityContent = useRef(new Animated.Value(0)).current;
+  const colorForText = useRef(new Animated.Value(0)).current;
+  const activeInput = useRef(new Animated.Value(0)).current;
   const dispatch = useDispatch();
+  const [password, setPassword] = useState('');
 
-  const fadeIn = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+  const fadeOut = (): void => {
     Animated.timing(pokedexOpacity, {
-      toValue: 1,
-      duration: 3000,
-      useNativeDriver: true,
+      toValue: 0,
+      duration: 4000,
+      useNativeDriver: false,
     }).start();
     Animated.timing(opacityContent, {
-      toValue: 0,
-      duration: 3000,
+      toValue: 1,
+      duration: 4000,
+      delay: 4000,
       useNativeDriver: true,
     }).start();
   };
 
-  const fadeOut = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
-    Animated.timing(pokedexOpacity, {
-      toValue: 0,
-      duration: 4000,
-      useNativeDriver: true,
+  const colorChanging = (): void => {
+    Animated.timing(colorForText, {
+      toValue: 100,
+      duration: 5000,
+      delay: 8000,
+      useNativeDriver: false,
     }).start();
-    Animated.timing(opacityContent, {
+  };
+
+  const activeInputAnimation = (): void => {
+    debugger;
+    Animated.timing(activeInput, {
       toValue: 1,
-      duration: 4000,
-      useNativeDriver: true,
+      duration: 1000,
+      useNativeDriver: false,
     }).start();
+  };
+
+  const deactiveInputAnimation = (): void => {
+    debugger;
+    Animated.timing(activeInput, {
+      toValue: 0,
+      duration: 1000,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const logInUser = (): void => {
+    if (password === 'poke123') {
+      dispatch(LoginUser());
+      navigate('Home');
+    }
   };
 
   useEffect(() => {
     fadeOut();
-
-    return () => {
-      fadeIn();
-    };
+    colorChanging();
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <PokedexAnimation pokedexOpacity={pokedexOpacity} />
-      <Animated.View style={{opacity: opacityContent}}>
-        <View>
-          <Text>It works</Text>
+      <Animated.View
+        style={{
+          opacity: pokedexOpacity,
+        }}>
+        <PokedexAnimation />
+      </Animated.View>
+      <Animated.View style={[styles.content, {opacity: opacityContent}]}>
+        <View style={[styles.title, styles.wrapper]}>
+          <Animated.Text
+            style={[
+              styles.animatedText,
+              {
+                color: colorForText.interpolate({
+                  inputRange: [0, 25, 75, 100],
+                  outputRange: ['#000000', '#EBE900', '#EB270B', '#0F4DDB'],
+                }),
+              },
+            ]}>
+            Pokedex
+          </Animated.Text>
+        </View>
+        <View style={styles.login}>
+          <Animated.View
+            style={[
+              styles.passwordAnimatedWrapper,
+              {
+                backgroundColor: activeInput.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: ['#fff', '#FFF82B'],
+                }),
+              },
+            ]}>
+            <PokeInput
+              placeholder="Password"
+              isPassword
+              value={password}
+              onChangeText={(text: string) => setPassword(text)}
+              style={styles.password}
+              onFocus={() => {
+                activeInputAnimation();
+              }}
+              onBlur={() => {
+                deactiveInputAnimation();
+              }}
+            />
+          </Animated.View>
           <Button
             title="Login"
             onPress={() => {
-              dispatch(LoginUser());
-              navigate('Home');
+              logInUser();
             }}
           />
         </View>
