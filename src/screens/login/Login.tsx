@@ -40,7 +40,6 @@ const Login: React.FC<any> = () => {
   };
 
   const activeInputAnimation = (): void => {
-    debugger;
     Animated.timing(activeInput, {
       toValue: 1,
       duration: 1000,
@@ -49,7 +48,6 @@ const Login: React.FC<any> = () => {
   };
 
   const deactiveInputAnimation = (): void => {
-    debugger;
     Animated.timing(activeInput, {
       toValue: 0,
       duration: 1000,
