@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect} from 'react';
 import {SafeAreaView, View, Text, FlatList} from 'react-native';
 import {getUser} from 'src/store/user/user.selector';
@@ -6,6 +7,7 @@ import {IUser} from 'src/store/user/user.types';
 import {GetPokemnos} from 'src/store/pokemons/Pokemon.action';
 import {getPokemons} from 'src/store/pokemons/Pokemon.selector';
 import {PokemonsArrayType} from 'store/pokemons/Pokemon.types';
+import PokemonItem from 'src/components/pokemonListItem/PokemonItem';
 
 const Home: React.FC<any> = () => {
   const user: IUser | null = useSelector(getUser);
@@ -25,11 +27,7 @@ const Home: React.FC<any> = () => {
       <View>
         <FlatList
           data={pokemnos}
-          renderItem={({item}) => (
-            <View>
-              <Text>{`${item.id}: ${item.name}`}</Text>
-            </View>
-          )}
+          renderItem={({item}) => <PokemonItem name={item.name} id={item.id} />}
           keyExtractor={(item) => item.name}
         />
       </View>
