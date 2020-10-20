@@ -1,6 +1,7 @@
 import React from 'react';
 import {Image, Text, View, TouchableOpacity} from 'react-native';
 import {styles} from './PokemonItem.style';
+import {navigate} from 'src/navigation/NavigationServices';
 
 interface Props {
   name: string;
@@ -9,7 +10,10 @@ interface Props {
 
 const PokemonItem: React.FC<Props> = ({name, id}) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => {
+        navigate('Details', {id});
+      }}>
       <View style={styles.container}>
         <View style={styles.wrapper}>
           <Image
