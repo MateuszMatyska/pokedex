@@ -27,3 +27,18 @@ export const getPokemonByUrl = (url: string) => {
       });
   });
 };
+
+export const getPokemonById = (id: number) => {
+  return new Promise((resolve, reject) => {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        resolve(json);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
