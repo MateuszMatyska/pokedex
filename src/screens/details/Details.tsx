@@ -8,6 +8,7 @@ import Name from './components/Name/Name';
 import Photo from './components/Photo/Photo';
 import {styles} from './Details.style';
 import Info from './components/Info/Info';
+import Stats from './components/Stats/Stats';
 
 type RootStackParamList = {
   Details: {id: string};
@@ -50,7 +51,7 @@ const Details: React.FC<Props> = (props) => {
         <Text style={styles.headerText}>Stats:</Text>
         <FlatList
           data={pokemon?.stats}
-          renderItem={({item}) => <Info name={item.name} value={item.value} />}
+          renderItem={({item}) => <Stats name={item.name} value={item.value} />}
           keyExtractor={(item) => item.name}
         />
       </View>
