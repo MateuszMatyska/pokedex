@@ -48,19 +48,19 @@ const Details: React.FC<Props> = (props) => {
         <Info name="Experience" value={pokemon?.baseExperience} />
       </View>
       <View style={styles.wrapper}>
-        <Text style={styles.headerText}>Stats:</Text>
-        <FlatList
-          data={pokemon?.stats}
-          renderItem={({item}) => <Stats name={item.name} value={item.value} />}
-          keyExtractor={(item) => item.name}
-        />
-      </View>
-      <View style={styles.wrapper}>
         <Text style={styles.headerText}>Types:</Text>
         <FlatList
           data={pokemon?.types}
           renderItem={({item}) => <Text style={styles.typeText}>{item}</Text>}
           keyExtractor={(item) => item}
+        />
+      </View>
+      <View style={styles.wrapper}>
+        <Text style={styles.headerText}>Stats:</Text>
+        <FlatList
+          data={pokemon?.stats}
+          renderItem={({item}) => <Stats name={item.name} value={item.value} />}
+          keyExtractor={(item) => item.name}
         />
       </View>
     </SafeAreaView>

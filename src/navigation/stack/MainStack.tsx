@@ -9,9 +9,27 @@ const MainStack: React.FC<any> = () => {
 
   return (
     <Stack.Navigator headerMode="none">
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Details" component={Details} />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{
+          animationTypeForReplace: 'pop',
+        }}
+      />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{
+          animationTypeForReplace: 'push',
+        }}
+      />
+      <Stack.Screen
+        name="Details"
+        component={Details}
+        options={{
+          animationTypeForReplace: 'pop',
+        }}
+      />
     </Stack.Navigator>
   );
 };
