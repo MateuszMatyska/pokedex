@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
     height: 40,
+    marginVertical: 5,
   },
   statsBar: {
     height: '100%',
@@ -14,6 +15,8 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.blue,
     borderColor: colors.black,
     borderWidth: 1,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
   },
   text: {
     fontSize: 20,

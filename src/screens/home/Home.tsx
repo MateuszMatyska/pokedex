@@ -45,7 +45,7 @@ const Home: React.FC<any> = () => {
       easing: Easing.out(Easing.exp),
     });
     animatedContent.value = delay(
-      4000,
+      3000,
       withTiming(1, {
         duration: 4000,
         easing: Easing.out(Easing.exp),

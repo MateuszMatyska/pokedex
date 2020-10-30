@@ -6,6 +6,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
+  delay,
 } from 'react-native-reanimated';
 
 interface Props {
@@ -22,10 +23,13 @@ const Name: React.FC<Props> = ({name}) => {
   });
 
   useEffect(() => {
-    animatedOpacity.value = withTiming(1, {
-      duration: 15000,
-      easing: Easing.out(Easing.exp),
-    });
+    animatedOpacity.value = delay(
+      4000,
+      withTiming(1, {
+        duration: 15000,
+        easing: Easing.out(Easing.exp),
+      }),
+    );
   });
 
   return name ? (

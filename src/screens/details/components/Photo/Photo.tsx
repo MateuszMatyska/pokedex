@@ -4,6 +4,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
+  delay,
 } from 'react-native-reanimated';
 import {styles} from './Photo.style';
 
@@ -21,10 +22,13 @@ const Photo: React.FC<Props> = ({id}) => {
   });
 
   useEffect(() => {
-    rotation.value = withSpring(360, {
-      damping: 20,
-      stiffness: 90,
-    });
+    rotation.value = delay(
+      4000,
+      withSpring(360, {
+        damping: 20,
+        stiffness: 90,
+      }),
+    );
   }, [rotation.value]);
 
   return (
