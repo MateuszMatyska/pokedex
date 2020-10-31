@@ -1,4 +1,6 @@
 import {StyleSheet} from 'react-native';
+import {maxWidth, maxHeight} from 'src/utils/Dimension';
+import {colors} from 'src/const/colors';
 
 export const styles: any = StyleSheet.create({
   container: {
@@ -7,9 +9,19 @@ export const styles: any = StyleSheet.create({
     alignItems: 'center',
   },
   listWrapper: {
-    width: '90%',
+    flex: 1,
+    marginHorizontal: '5%',
   },
   animationWrapper: {
     width: '100%',
+  },
+  statusBarWrapper: {
+    width: maxWidth,
+    height: 10,
+  },
+  statusBar: {
+    backgroundColor: colors.blue,
+    width: '100%',
+    height: '100%',
   },
 });
