@@ -1,23 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useRef, useState} from 'react';
 import {SafeAreaView, View, Button, Animated, Text} from 'react-native';
-// import {LoginUser} from 'src/store/user/user.action';
-// import {useDispatch} from 'react-redux';
-// import {navigate} from 'src/navigation/NavigationServices';
+import {LoginUser} from 'src/store/user/user.action';
+import {useDispatch} from 'react-redux';
+import {navigate} from 'src/navigation/NavigationServices';
 import PokedexAnimation from 'src/components/pokedexAnimation/PokedexAnimation';
 import PokeInput from 'src/components/pokeInput/PokeInput';
 import {styles} from './Login.styles';
-import userRX from 'src/store/userRX/user';
-import {IUser} from 'store/user/user.types';
 
 const Login: React.FC<any> = () => {
   const pokedexOpacity = useRef(new Animated.Value(1)).current;
   const opacityContent = useRef(new Animated.Value(0)).current;
   const colorForText = useRef(new Animated.Value(0)).current;
   const activeInput = useRef(new Animated.Value(0)).current;
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState<IUser>();
 
   const fadeOut = (): void => {
     Animated.timing(pokedexOpacity, {
@@ -60,19 +57,15 @@ const Login: React.FC<any> = () => {
 
   const logInUser = (): void => {
     if (password === '123') {
-      userRX.loginUser('Ash', '123');
-      // dispatch(LoginUser());
-      // navigate('Home');
+      dispatch(LoginUser());
+      navigate('Home');
     }
   };
 
   useEffect(() => {
     fadeOut();
     colorChanging();
-    userRX.storeUser$.subscribe((userData: IUser) => {
-      setUser(userData);
-    });
-  }, [user]);
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
