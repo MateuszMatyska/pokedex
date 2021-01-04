@@ -1,9 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useRef, useState} from 'react';
 import {SafeAreaView, View, Button, Animated, Text} from 'react-native';
-// import {LoginUser} from 'src/store/user/user.action';
-// import {useDispatch} from 'react-redux';
-// import {navigate} from 'src/navigation/NavigationServices';
+import {navigate} from 'src/navigation/NavigationServices';
 import PokedexAnimation from 'src/components/pokedexAnimation/PokedexAnimation';
 import PokeInput from 'src/components/pokeInput/PokeInput';
 import {styles} from './Login.styles';
@@ -15,7 +13,6 @@ const Login: React.FC<any> = () => {
   const opacityContent = useRef(new Animated.Value(0)).current;
   const colorForText = useRef(new Animated.Value(0)).current;
   const activeInput = useRef(new Animated.Value(0)).current;
-  // const dispatch = useDispatch();
   const [password, setPassword] = useState('');
   const [user, setUser] = useState<IUser>();
 
@@ -61,8 +58,7 @@ const Login: React.FC<any> = () => {
   const logInUser = (): void => {
     if (password === '123') {
       userRX.loginUser('Ash', '123');
-      // dispatch(LoginUser());
-      // navigate('Home');
+      navigate('Home');
     }
   };
 
