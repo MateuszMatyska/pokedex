@@ -1,9 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, FlatList, View} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {GetPokemnos} from 'src/store/pokemons/Pokemon.action';
-import {getPokemons} from 'src/store/pokemons/Pokemon.selector';
 import {PokemonsArrayType} from 'store/pokemons/Pokemon.types';
 import PokemonItem from 'src/components/pokemonListItem/PokemonItem';
 import PokedexAnimation from 'src/components/pokedexAnimation/PokedexAnimation';
@@ -15,17 +12,18 @@ import Animated, {
   withTiming,
   delay,
 } from 'react-native-reanimated';
+import PokemonRX from 'src/store/pokemonsRX/pokemon';
 
 const Home: React.FC<any> = () => {
   const [scrollViewHeight, setScrollViewHeight] = useState(0);
   const [scrollViewContentHeight, setScrollViewContentHeight] = useState(0);
   const animatedWidth = useSharedValue(0);
-
-  const pokemnos = useSelector(getPokemons) as PokemonsArrayType[];
-  const dispatch = useDispatch();
+  const [pokeArray, setPokeArray] = useState<PokemonsArrayType[]>([]);
 
   useEffect(() => {
-    dispatch(GetPokemnos());
+    PokemonRX.getPokemons().subscribe((res: PokemonsArrayType[]) =>
+      setPokeArray(res),
+    );
   }, []);
 
   const animatedPokedex = useSharedValue(1);
@@ -101,7 +99,7 @@ const Home: React.FC<any> = () => {
             onLayout={(event) => {
               setScrollViewHeight(event.nativeEvent.layout.height);
             }}
-            data={pokemnos}
+            data={pokeArray}
             renderItem={({item}) => (
               <PokemonItem name={item.name} id={item.id} />
             )}
