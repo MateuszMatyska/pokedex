@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Text, View, SafeAreaView, FlatList} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import PokemonService from 'src/services/PokemonServices';
 import {PokemonType} from 'store/pokemons/Pokemon.types';
 import Name from './components/Name/Name';
 import Photo from './components/Photo/Photo';
@@ -18,6 +17,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import PokedexAnimation from 'src/components/pokedexAnimation/PokedexAnimation';
+import PokemonRX from 'src/store/pokemonsRX/pokemon';
 
 type RootStackParamList = {
   Details: {id: string};
@@ -54,9 +54,9 @@ const Details: React.FC<Props> = (props) => {
   });
 
   useEffect(() => {
-    PokemonService.getPokemonDetails(id)
-      .then((resolve: PokemonType | undefined) => setPokemon(resolve))
-      .catch((reject: any) => console.warn(reject));
+    PokemonRX.getPokemonDetails(id).subscribe((res: PokemonType) =>
+      setPokemon(res),
+    );
 
     animatedPokedex.value = withTiming(0, {
       duration: 4000,
