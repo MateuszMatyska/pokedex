@@ -2,10 +2,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {SafeAreaView, View, Button, Animated, Text} from 'react-native';
 import {LoginUser} from 'src/store/user/user.action';
-import {useDispatch} from 'react-redux';
+import {getUser} from 'src/store/user/user.selector';
+import {useDispatch, useSelector} from 'react-redux';
 import {navigate} from 'src/navigation/NavigationServices';
 import PokedexAnimation from 'src/components/pokedexAnimation/PokedexAnimation';
 import PokeInput from 'src/components/pokeInput/PokeInput';
+import {IUser} from 'src/store/user/user.types';
 import {styles} from './Login.styles';
 
 const Login: React.FC<any> = () => {
@@ -14,6 +16,7 @@ const Login: React.FC<any> = () => {
   const colorForText = useRef(new Animated.Value(0)).current;
   const activeInput = useRef(new Animated.Value(0)).current;
   const dispatch = useDispatch();
+  const user = useSelector(getUser) as IUser;
   const [password, setPassword] = useState('');
 
   const fadeOut = (): void => {
