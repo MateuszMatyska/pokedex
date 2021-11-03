@@ -10,6 +10,7 @@ interface Props {
   isPassword: boolean | undefined;
   onFocus: (() => void) | undefined;
   onBlur: (() => void) | undefined;
+  testID: string;
 }
 
 const PokeInput: React.FC<Props> = ({
@@ -20,6 +21,7 @@ const PokeInput: React.FC<Props> = ({
   isPassword,
   onFocus,
   onBlur,
+  testID,
 }) => {
   return (
     <TextInput
@@ -30,6 +32,7 @@ const PokeInput: React.FC<Props> = ({
       secureTextEntry={isPassword}
       onFocus={onFocus}
       onBlur={onBlur}
+      testID={testID}
     />
   );
 };

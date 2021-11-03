@@ -105,6 +105,7 @@ const Login: React.FC<any> = () => {
               },
             ]}>
             <PokeInput
+              testID="PasswordInputID"
               placeholder="Password"
               isPassword
               value={password}
