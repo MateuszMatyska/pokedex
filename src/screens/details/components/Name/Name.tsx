@@ -11,9 +11,10 @@ import Animated, {
 
 interface Props {
   name: string | undefined;
+  testID: string;
 }
 
-const Name: React.FC<Props> = ({name}) => {
+const Name: React.FC<Props> = ({name, testID}) => {
   const animatedOpacity = useSharedValue(0);
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -34,7 +35,7 @@ const Name: React.FC<Props> = ({name}) => {
 
   return name ? (
     <Animated.View style={[styles.nameWrapper, animatedStyle]}>
-      <Text style={styles.nameText}>
+      <Text style={styles.nameText} testID={testID}>
         {name.charAt(0).toUpperCase() + name.slice(1)}
       </Text>
     </Animated.View>

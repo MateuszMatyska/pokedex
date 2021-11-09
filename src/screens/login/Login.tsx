@@ -120,6 +120,7 @@ const Login: React.FC<any> = () => {
             />
           </Animated.View>
           <Button
+            testID="LoginBtnID"
             title="Login"
             onPress={() => {
               logInUser();

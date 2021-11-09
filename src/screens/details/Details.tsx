@@ -79,7 +79,7 @@ const Details: React.FC<Props> = (props) => {
       <Animated.View style={[styles.container, contentStyle]}>
         <View style={styles.duoWrapper}>
           <Photo id={id} />
-          <Name name={pokemon?.name} />
+          <Name name={pokemon?.name} testID="PokemonNameID" />
         </View>
         <View style={styles.duoWrapper}>
           <Info name="Height" value={pokemon?.height} />

@@ -6,16 +6,17 @@ import {navigate} from 'src/navigation/NavigationServices';
 interface Props {
   name: string;
   id: number;
+  testID: string;
 }
 
-const PokemonItem: React.FC<Props> = ({name, id}) => {
+const PokemonItem: React.FC<Props> = ({name, id, testID}) => {
   return (
     <TouchableOpacity
       onPress={() => {
         navigate('Details', {id});
       }}>
       <View style={styles.container}>
-        <View style={styles.wrapper}>
+        <View style={styles.wrapper} testID={testID}>
           <Image
             style={styles.image}
             source={{

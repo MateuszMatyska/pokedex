@@ -92,6 +92,7 @@ const Home: React.FC<any> = () => {
         </View>
         <View style={styles.listWrapper}>
           <FlatList
+            testID="PokeListID"
             onScroll={(event) => {
               setStatus(event.nativeEvent.contentOffset.y);
             }}
@@ -103,7 +104,11 @@ const Home: React.FC<any> = () => {
             }}
             data={pokemnos}
             renderItem={({item}) => (
-              <PokemonItem name={item.name} id={item.id} />
+              <PokemonItem
+                name={item.name}
+                id={item.id}
+                testID={`ListItemID-${item.id}`}
+              />
             )}
             keyExtractor={(item) => item.name}
           />
